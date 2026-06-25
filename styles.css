@@ -1,0 +1,350 @@
+﻿        body {
+            background-color: #0a0f1e;
+            overflow-x: hidden;
+            color: #dee1f7;
+        }
+
+        .ambient-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            overflow: hidden;
+            background: #0a0f1e;
+        }
+
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 800px;
+            height: 800px;
+            background: #bcc7de;
+            top: -10%;
+            left: -10%;
+            animation: float-1 25s ease-in-out infinite alternate;
+        }
+
+        .blob-2 {
+            width: 700px;
+            height: 700px;
+            background: #3e495d;
+            bottom: -5%;
+            right: -5%;
+            animation: float-2 30s ease-in-out infinite alternate;
+            opacity: 0.25;
+        }
+
+        .blob-3 {
+            width: 600px;
+            height: 600px;
+            background: #dde3eb;
+            top: 40%;
+            left: 50%;
+            animation: float-3 22s ease-in-out infinite alternate;
+            opacity: 0.1;
+        }
+
+        .blob-4 {
+            width: 500px;
+            height: 500px;
+            background: #56657c;
+            top: 10%;
+            right: 20%;
+            animation: float-4 28s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-1 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(100px, 50px) scale(1.1);
+            }
+        }
+
+        @keyframes float-2 {
+            0% {
+                transform: translate(0, 0) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-120px, -80px) scale(0.9);
+            }
+        }
+
+        @keyframes float-3 {
+            0% {
+                transform: translate(0, 0) scale(0.95);
+            }
+
+            100% {
+                transform: translate(-50px, 150px) scale(1.15);
+            }
+        }
+
+        @keyframes float-4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(80px, -100px) scale(0.85);
+            }
+        }
+
+        .ambient-overlay {
+            position: fixed;
+            inset: 0;
+            backdrop-filter: blur(40px);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-blob {
+                animation: none !important;
+            }
+
+            .reveal-on-scroll {
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        .glass-card {
+            backdrop-filter: blur(20px);
+            background: rgba(221, 227, 235, 0.05);
+            border: 1px solid rgba(221, 227, 235, 0.1);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(221, 227, 235, 0.08);
+            border: 1px solid rgba(221, 227, 235, 0.25);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px) scale(1.02);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card-container {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card-container.focused {
+            transform: scale(1.03);
+        }
+
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .transform-origin-top {
+            transform-origin: top center;
+        }
+
+        .swing-animation {
+            animation: swing 4.5s ease-in-out infinite alternate;
+        }
+
+        .swing-animation:hover {
+            animation-play-state: paused;
+            transform: rotate(0deg) scale(1.05);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 20;
+        }
+
+        @keyframes swing {
+            0% {
+                transform: rotate(4deg);
+            }
+
+            100% {
+                transform: rotate(-4deg);
+            }
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .handwritten {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        .nav-link {
+            position: relative;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: color 0.3s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: currentColor;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link-active::after {
+            width: 100%;
+        }
+
+        .magnetic-button {
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
+            will-change: transform;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .btn-hover-effect {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-hover-effect:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-hover-effect:active {
+            transform: scale(0.95);
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            body {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+
+            .glass-card {
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .glass-card:active {
+                transform: scale(0.98);
+                background: rgba(221, 227, 235, 0.1);
+            }
+
+            .project-card-container {
+                cursor: pointer;
+                -webkit-user-select: none;
+                user-select: none;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .project-card-container:active {
+                transform: scale(0.98);
+            }
+
+            .magnetic-button {
+                -webkit-tap-highlight-color: transparent;
+                cursor: pointer;
+                transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+
+            .magnetic-button:active {
+                background: rgba(255, 255, 255, 0.9);
+            }
+
+            .nav-link {
+                padding: 8px 0;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Disable hover effects on touch devices */
+            @supports (hover: hover) and (pointer: fine) {
+                /* Hover styles only for devices with hover capability */
+            }
+
+            /* Force opacity for better mobile feedback */
+            * {
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+            }
+
+            /* Improve scrolling performance */
+            .reveal-on-scroll {
+                will-change: opacity, transform;
+            }
+
+            /* Better touch targets */
+            button,
+            a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Touch device specific */
+        @media (hover: none) and (pointer: coarse) {
+            .glass-card:hover {
+                background: rgba(221, 227, 235, 0.05);
+                border: 1px solid rgba(221, 227, 235, 0.1);
+                box-shadow: none;
+                transform: none;
+            }
+
+            .project-card-container:hover {
+                transform: none;
+            }
+
+            .btn-hover-effect:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
